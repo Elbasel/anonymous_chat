@@ -98,6 +98,10 @@ export default class SignUpForm {
       border-radius: 24px;
   }
   
+  button:active {
+    box-shadow: 1px 1px 10px 10px blue;
+  }
+
   #password-validation {
       // position: absolute;
       // width: 1x;
@@ -139,6 +143,11 @@ export default class SignUpForm {
         user.set("password", document.querySelector("#password").value);
         try {
           user = await user.save();
+          localStorage.setItem("logged-in-user", user.id);
+          Parse.User.logIn(
+            document.querySelector("#username").value.toLowerCase(),
+            document.querySelector("#password").value.toLowerCase()
+          );
           PubSub.publish("new-user-created", user.get("username"));
         } catch (error) {
           document.body.querySelector("#password-validation").textContent =

@@ -167,6 +167,7 @@ export default class Home {
 
       try {
         const user = await Parse.User.logIn(username, password);
+        localStorage.setItem("logged-in-user", user.id);
         PubSub.publish("user-logged-in", user);
       } catch (error) {
         document.querySelector("#loading-div").style.display = "none";
