@@ -138,7 +138,7 @@ export default class SignUpForm {
         user.set("password", document.querySelector("#password").value);
         try {
           user = await user.save();
-          console.log(user);
+          PubSub.publish("new-user-created", user.get("username"));
         } catch (error) {
           document.body.querySelector("#password-validation").textContent =
             error.message;

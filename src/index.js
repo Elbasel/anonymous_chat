@@ -29,3 +29,8 @@ PubSub.subscribe("sign-up-page-requested", (msg, data) => {
   document.body.innerHTML = "";
   signUpForm.init();
 });
+
+PubSub.subscribe("new-user-created", (msg, username) => {
+  document.body.innerHTML = "";
+  chat.init("username");
+});
