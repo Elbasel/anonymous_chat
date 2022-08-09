@@ -132,9 +132,10 @@ export default class SignUpForm {
           return;
         }
         let user = new Parse.User();
-        user
-          .set("username", document.querySelector("#username").value)
-          .toUpperCase();
+        user.set(
+          "username",
+          document.querySelector("#username").value.toLowerCase()
+        );
         user.set("password", document.querySelector("#password").value);
         try {
           user = await user.save();
