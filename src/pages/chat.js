@@ -2,41 +2,6 @@ import UploadImgPng from "../assests/img.png";
 import sendImgPng from "../assests/send.png";
 import PubSub from "pubsub-js";
 import moment from "moment";
-function saveJobApp(objParseFile) {
-  var jobApplication = new Parse.Object("JobApplication");
-  jobApplication.set("applicantName", "Joe Smith");
-  jobApplication.set("profileImg", objParseFile);
-  jobApplication.save(null, {
-    success: function (gameScore) {
-      // Execute any logic that should take place after the object is saved.
-      var photo = gameScore.get("profileImg");
-      $("#profileImg")[0].src = photo.url();
-    },
-    error: function (gameScore, error) {
-      // Execute any logic that should take place if the save fails.
-      // error is a Parse.Error with an error code and description.
-      alert(
-        "Failed to create new object, with error code: " + error.description
-      );
-    },
-  });
-}
-
-$("#profilePhotoFileUpload").bind("change", function (e) {
-  var fileUploadControl = $("#profilePhotoFileUpload")[0];
-  var file = fileUploadControl.files[0];
-  var name = file.name; //This does *NOT* need to be a unique name
-  var parseFile = new Parse.File(name, file);
-
-  parseFile.save().then(
-    function () {
-      saveJobApp(parseFile);
-    },
-    function (error) {
-      alert("error");
-    }
-  );
-});
 import $ from "jquery";
 const Parse = require("parse");
 
@@ -63,7 +28,8 @@ export default class Chat {
     </div>
   </div>
   <div class="msg-area">
-    <button class="msg-button"><img id="upload-img" /></button>
+    <button id="upload-img-button" class="msg-button"><img id="upload-img" /></button>
+    <input type="file" name="file-upload" id="file-upload">
     <input id="text" type="text" />
     <button id="send-button" class="msg-button"><img id="send" /></button>
   </div>
@@ -76,7 +42,14 @@ export default class Chat {
       padding: 32px;
   }
   
-  
+  #file-upload {
+    position: absolute;
+    appearance: none;
+    display: none;
+
+}
+
+
   .header-area {
       flex: 1;
       display: flex;
@@ -245,6 +218,13 @@ html {
     document.body.innerHTML = `<style>${this.css}</style>` + this.html;
     document.querySelector("#upload-img").src = UploadImgPng;
     document.querySelector("#send").src = sendImgPng;
+
+    document
+      .querySelector("#upload-img-button")
+      .addEventListener("click", () => {
+        document.querySelector("#file-upload").click();
+      });
+
     document.querySelector("#send-button").addEventListener("click", () => {
       PubSub.publish("msgSent", Parse.User.current());
       // console.log(Parse.User.current());
@@ -257,6 +237,8 @@ html {
 
       // document.body.style.maxHeight = "100vh";
     });
+
+    this.uploadFile();
 
     document.body
       .querySelector("#logout-button")
@@ -304,13 +286,13 @@ html {
           const username = message.get("username");
           const createdAt = moment(message.createdAt).format("LT");
           // console.log(myCustomKey1Name);
-
+          const imgUrl = message.get("img");
           let msgClass = "";
           // debugger;
           if (!(username == Parse.User.current().get("username"))) {
             msgClass = "other";
           }
-          this.addMsg({ body, username, createdAt, msgClass });
+          this.addMsg({ body, username, createdAt, msgClass, imgUrl });
 
           console.log(message);
         }
@@ -344,13 +326,13 @@ html {
             const username = message.get("username");
             const createdAt = moment(message.createdAt).format("LT");
             // console.log(myCustomKey1Name);
-
+            const imgUrl = message.get("img");
             let msgClass = "";
             // debugger;
             if (!(username == Parse.User.current().get("username"))) {
               msgClass = "other";
             }
-            this.addMsg({ body, username, createdAt, msgClass });
+            this.addMsg({ body, username, createdAt, msgClass, imgUrl });
 
             console.log(message);
           }
@@ -361,52 +343,76 @@ html {
     });
   }
 
-  addMsg({ body, username, createdAt, msgClass }) {
+  addMsg({ body, username, createdAt, msgClass, imgUrl }) {
+    // debugger;
     document.body
       .querySelector("#chat-area")
       .append(
         this.createElementFromHTML(
-          this.getMsgHTML(body, username, createdAt, msgClass)
+          this.getMsgHTML(body, username, createdAt, msgClass, imgUrl)
         )
       );
   }
 
-  saveJobApp(objParseFile) {
-    var jobApplication = new Parse.Object("JobApplication");
-    jobApplication.set("applicantName", "Joe Smith");
-    jobApplication.set("profileImg", objParseFile);
-    jobApplication.save(null, {
-      success: function (gameScore) {
-        // Execute any logic that should take place after the object is saved.
-        var photo = gameScore.get("profileImg");
-        $("#profileImg")[0].src = photo.url();
-      },
-      error: function (gameScore, error) {
-        // Execute any logic that should take place if the save fails.
-        // error is a Parse.Error with an error code and description.
-        alert(
-          "Failed to create new object, with error code: " + error.description
-        );
-      },
-    });
+  static async saveImgMessage(fileObject) {
+    var messageClass = Parse.Object.extend("Message");
+    var message = new messageClass();
+    message.set("img", fileObject.url());
+    // debugger;
+    message.set("username", Parse.User.current().get("username"));
+    message.set("body", "#");
+    // console.log(message);
+    // debugger;
+    message.save();
+    // const savedMessage = await message.save("");
+    // console.log(savedMessage);
+    // console.log({ username: Parse.User.current().get("username") });
+    // message.save("");
+    // { body: "", username: Parse.User.current().get("username") }
+    // {
+    //   success: function (savedMessage) {
+    //     // Execute any logic that should take place after the object is saved.
+    //     const photo = savedMessage.get("img");
+    //     this.addMsg({
+    //       body: "",
+    //       username: savedMessage.get("username"),
+    //       createdAt: savedMessage.createdAt,
+    //       msgClass:
+    //         savedMessage.get('username"') ==
+    //         Parse.User.current().get("username")
+    //           ? ""
+    //           : "other",
+    //       imgUrl: photo.url(),
+    //     });
+    //   },
+    //   error: function (gameScore, error) {
+    //     // Execute any logic that should take place if the save fails.
+    //     // error is a Parse.Error with an error code and description.
+    //     alert(
+    //       "Failed to create new object, with error code: " + error.description
+    //     );
+    //   },
+    // }
   }
 
   uploadFile() {
-    $("#profilePhotoFileUpload").bind("change", function (e) {
-      var fileUploadControl = $("#profilePhotoFileUpload")[0];
-      var file = fileUploadControl.files[0];
-      var name = file.name; //This does *NOT* need to be a unique name
-      var parseFile = new Parse.File(name, file);
+    document.body
+      .querySelector("#file-upload")
+      .addEventListener("change", function (e) {
+        var fileUploadControl = document.querySelector("#file-upload");
+        var file = fileUploadControl.files[0];
+        var name = file.name; //This does *NOT* need to be a unique name
+        var parseFile = new Parse.File(name, file);
 
-      parseFile.save().then(
-        function () {
-          saveJobApp(parseFile);
-        },
-        function (error) {
-          alert("error");
-        }
-      );
-    });
+        parseFile.save().then(
+          () => {
+            Chat.saveImgMessage(parseFile);
+          },
+          function (error) {
+            alert("error");
+          }
+        );
+      });
   }
 
   createElementFromHTML(htmlString) {
@@ -417,10 +423,26 @@ html {
     return div.firstChild;
   }
 
-  getMsgHTML(msgText, userName, sentAt, msgClass = "") {
+  getMsgHTML(msgText, userName, sentAt, msgClass = "", imgUrl = null) {
+    if (userName == Parse.User.current().get("username")) {
+      userName = "You";
+    }
+
+    if (imgUrl) {
+      return `
+        <div class="msg ${msgClass}">
+        <div class="msg-wrapper">
+          <img class="image-msg" src=${imgUrl}>
+          <p class="user">${userName} at ${sentAt}</p>
+        </div>
+      </div>
+        `;
+    }
+
     return `
     <div class="msg ${msgClass}">
       <div class="msg-wrapper">
+
         <p class="p-msg">${msgText}</p>
         <p class="user">${userName} at ${sentAt}</p>
       </div>

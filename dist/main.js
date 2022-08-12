@@ -70605,37 +70605,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
-function saveJobApp(objParseFile) {
-  var jobApplication = new Parse.Object("JobApplication");
-  jobApplication.set("applicantName", "Joe Smith");
-  jobApplication.set("profileImg", objParseFile);
-  jobApplication.save(null, {
-    success: function success(gameScore) {
-      // Execute any logic that should take place after the object is saved.
-      var photo = gameScore.get("profileImg");
-      jquery__WEBPACK_IMPORTED_MODULE_4___default()("#profileImg")[0].src = photo.url();
-    },
-    error: function error(gameScore, _error) {
-      // Execute any logic that should take place if the save fails.
-      // error is a Parse.Error with an error code and description.
-      alert("Failed to create new object, with error code: " + _error.description);
-    }
-  });
-}
-
-jquery__WEBPACK_IMPORTED_MODULE_4___default()("#profilePhotoFileUpload").bind("change", function (e) {
-  var fileUploadControl = jquery__WEBPACK_IMPORTED_MODULE_4___default()("#profilePhotoFileUpload")[0];
-  var file = fileUploadControl.files[0];
-  var name = file.name; //This does *NOT* need to be a unique name
-
-  var parseFile = new Parse.File(name, file);
-  parseFile.save().then(function () {
-    saveJobApp(parseFile);
-  }, function (error) {
-    alert("error");
-  });
-});
-
 
 var Parse = __webpack_require__(/*! parse */ "./node_modules/parse/index.js");
 
@@ -70643,8 +70612,8 @@ var Chat = /*#__PURE__*/function () {
   function Chat() {
     _classCallCheck(this, Chat);
 
-    this.html = "\n    <div class=\"header-area\">\n    <h1>Hello</h1>\n    <div id=\"clock\">1:00 PM</div>\n    <button id=\"logout-button\">Logout</button>\n  </div>\n  <div id=\"chat-area\">\n    <div class=\"msg\">\n      <div class=\"msg-wrapper\">\n        <p class=\"p-msg\">Hello!</p>\n        <p class=\"user\">elbasel at 5:00 pm</p>\n      </div>\n    </div>\n    <div class=\"msg other\">\n      <div class=\"msg-wrapper\">\n        <p class=\"p-msg\">Hello!</p>\n        <p class=\"user\">elbasel at 5:00 pm</p>\n      </div>\n    </div>\n  </div>\n  <div class=\"msg-area\">\n    <button class=\"msg-button\"><img id=\"upload-img\" /></button>\n    <input id=\"text\" type=\"text\" />\n    <button id=\"send-button\" class=\"msg-button\"><img id=\"send\" /></button>\n  </div>\n  ";
-    this.css = "\n    body {\n      display: flex;\n      flex-direction: column;\n      padding: 32px;\n  }\n  \n  \n  .header-area {\n      flex: 1;\n      display: flex;\n      justify-content: space-between;\n      border-bottom: 1px solid white;\n      align-items: center;\n      padding: 32px;\n      max-height: 200px;\n  }\n  \n  h1 {\n      font-size: 64px;\n  }\n  \n  #chat-area {\n    margin-top: 100px;\n    margin-bottom: 100px;\n    // border: 1px solid red;\n    flex: 10;\n\n    display: flex;\n    flex-direction: column;\n    gap: 32px;\n    padding: 32px;\n    overflow-y: scroll;\n    overflow-x: hidden;\n\n}\nhtml {\n  scrollbar-face-color: #646464;\n  scrollbar-base-color: #646464;\n  scrollbar-3dlight-color: #646464;\n  scrollbar-highlight-color: #646464;\n  scrollbar-track-color: #000;\n  scrollbar-arrow-color: #000;\n  scrollbar-shadow-color: #646464;\n  scrollbar-dark-shadow-color: #646464;\n}\n\n::-webkit-scrollbar { width: 8px; height: 3px;}\n::-webkit-scrollbar-button {  background-color: #666; }\n::-webkit-scrollbar-track {  background-color: #646464;}\n::-webkit-scrollbar-track-piece { background-color: #000;}\n::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}\n::-webkit-scrollbar-corner { background-color: #646464;}}\n::-webkit-resizer { background-color: #666;}\n  \n  .msg {\n      // border: 1px solid white;\n      font-size: 48px;\n      display: flex;\n      justify-content: flex-end;\n  }\n  \n  \n  .other {\n      justify-content: flex-start;\n  }\n  \n  .msg-wrapper {\n      background-color: red;\n      border-radius: 32px;\n      padding: 32px;\n      display: flex;\n      flex-direction: column;\n      gap: 16px;\n  \n  }\n  \n  .other > .msg-wrapper {\n      background-color: blue;\n  }\n  \n  \n  .user {\n      font-size: 32px;\n      color: rgba(0, 0, 0, 0.788);\n      font-style: italic;\n  }\n  \n  .msg-area {\n      flex: 1;\n      display: flex;\n      // border-top: 1px solid white;\n      // padding: 32px;\n  \n      gap: 32px;\n  \n      align-items: center;\n  \n  \n  }\n  html {\n    scrollbar-face-color: #646464;\n    scrollbar-base-color: #646464;\n    scrollbar-3dlight-color: #646464;\n    scrollbar-highlight-color: #646464;\n    scrollbar-track-color: #000;\n    scrollbar-arrow-color: #000;\n    scrollbar-shadow-color: #646464;\n    scrollbar-dark-shadow-color: #646464;\n  }\n  \n  ::-webkit-scrollbar { width: 8px; height: 3px;}\n  ::-webkit-scrollbar-button {  background-color: #666; }\n  ::-webkit-scrollbar-track {  background-color: #646464;}\n  ::-webkit-scrollbar-track-piece { background-color: #000;}\n  ::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}\n  ::-webkit-scrollbar-corner { background-color: #646464;}}\n  ::-webkit-resizer { background-color: #666;}\n  .msg-button {\n      flex: 1;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      background-color: rgba(255, 255, 255, 0);\n      border: 0;\n      color: white;\n  }\n  \n  img {\n      fill: white;\n      color: white;\n      flex: 1;\n      // width: 30%;\n      // height: 100%;\n      max-width: 300px;\n      max-height: 300px;\n  }\n  \n  \n  input {\n      height:100px;\n      border-radius: 18px;\n      flex: 5;\n      padding: 32px;\n      font-size: 42px;\n  }\n  \n  #logout-button {\n      // position: absolute;\n      // top: 50px;\n      // right: 50px;\n      // margin-left: 16px;\n      // margin-top: 16px;\n      padding: 32px;\n      font-size: 32px;\n      width: 200px;\n      height: 100px;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      border-radius: 18px;\n  }\n  \n  #clock {\n    color: white;\n    font-size: 64px;\n    // width: 300px;\n    // height: 300px;\n    // z-index: 3;\n}";
+    this.html = "\n    <div class=\"header-area\">\n    <h1>Hello</h1>\n    <div id=\"clock\">1:00 PM</div>\n    <button id=\"logout-button\">Logout</button>\n  </div>\n  <div id=\"chat-area\">\n    <div class=\"msg\">\n      <div class=\"msg-wrapper\">\n        <p class=\"p-msg\">Hello!</p>\n        <p class=\"user\">elbasel at 5:00 pm</p>\n      </div>\n    </div>\n    <div class=\"msg other\">\n      <div class=\"msg-wrapper\">\n        <p class=\"p-msg\">Hello!</p>\n        <p class=\"user\">elbasel at 5:00 pm</p>\n      </div>\n    </div>\n  </div>\n  <div class=\"msg-area\">\n    <button id=\"upload-img-button\" class=\"msg-button\"><img id=\"upload-img\" /></button>\n    <input type=\"file\" name=\"file-upload\" id=\"file-upload\">\n    <input id=\"text\" type=\"text\" />\n    <button id=\"send-button\" class=\"msg-button\"><img id=\"send\" /></button>\n  </div>\n  ";
+    this.css = "\n    body {\n      display: flex;\n      flex-direction: column;\n      padding: 32px;\n  }\n  \n  #file-upload {\n    position: absolute;\n    appearance: none;\n    display: none;\n\n}\n\n\n  .header-area {\n      flex: 1;\n      display: flex;\n      justify-content: space-between;\n      border-bottom: 1px solid white;\n      align-items: center;\n      padding: 32px;\n      max-height: 200px;\n  }\n  \n  h1 {\n      font-size: 64px;\n  }\n  \n  #chat-area {\n    margin-top: 100px;\n    margin-bottom: 100px;\n    // border: 1px solid red;\n    flex: 10;\n\n    display: flex;\n    flex-direction: column;\n    gap: 32px;\n    padding: 32px;\n    overflow-y: scroll;\n    overflow-x: hidden;\n\n}\nhtml {\n  scrollbar-face-color: #646464;\n  scrollbar-base-color: #646464;\n  scrollbar-3dlight-color: #646464;\n  scrollbar-highlight-color: #646464;\n  scrollbar-track-color: #000;\n  scrollbar-arrow-color: #000;\n  scrollbar-shadow-color: #646464;\n  scrollbar-dark-shadow-color: #646464;\n}\n\n::-webkit-scrollbar { width: 8px; height: 3px;}\n::-webkit-scrollbar-button {  background-color: #666; }\n::-webkit-scrollbar-track {  background-color: #646464;}\n::-webkit-scrollbar-track-piece { background-color: #000;}\n::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}\n::-webkit-scrollbar-corner { background-color: #646464;}}\n::-webkit-resizer { background-color: #666;}\n  \n  .msg {\n      // border: 1px solid white;\n      font-size: 48px;\n      display: flex;\n      justify-content: flex-end;\n  }\n  \n  \n  .other {\n      justify-content: flex-start;\n  }\n  \n  .msg-wrapper {\n      background-color: red;\n      border-radius: 32px;\n      padding: 32px;\n      display: flex;\n      flex-direction: column;\n      gap: 16px;\n  \n  }\n  \n  .other > .msg-wrapper {\n      background-color: blue;\n  }\n  \n  \n  .user {\n      font-size: 32px;\n      color: rgba(0, 0, 0, 0.788);\n      font-style: italic;\n  }\n  \n  .msg-area {\n      flex: 1;\n      display: flex;\n      // border-top: 1px solid white;\n      // padding: 32px;\n  \n      gap: 32px;\n  \n      align-items: center;\n  \n  \n  }\n  html {\n    scrollbar-face-color: #646464;\n    scrollbar-base-color: #646464;\n    scrollbar-3dlight-color: #646464;\n    scrollbar-highlight-color: #646464;\n    scrollbar-track-color: #000;\n    scrollbar-arrow-color: #000;\n    scrollbar-shadow-color: #646464;\n    scrollbar-dark-shadow-color: #646464;\n  }\n  \n  ::-webkit-scrollbar { width: 8px; height: 3px;}\n  ::-webkit-scrollbar-button {  background-color: #666; }\n  ::-webkit-scrollbar-track {  background-color: #646464;}\n  ::-webkit-scrollbar-track-piece { background-color: #000;}\n  ::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}\n  ::-webkit-scrollbar-corner { background-color: #646464;}}\n  ::-webkit-resizer { background-color: #666;}\n  .msg-button {\n      flex: 1;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      background-color: rgba(255, 255, 255, 0);\n      border: 0;\n      color: white;\n  }\n  \n  img {\n      fill: white;\n      color: white;\n      flex: 1;\n      // width: 30%;\n      // height: 100%;\n      max-width: 300px;\n      max-height: 300px;\n  }\n  \n  \n  input {\n      height:100px;\n      border-radius: 18px;\n      flex: 5;\n      padding: 32px;\n      font-size: 42px;\n  }\n  \n  #logout-button {\n      // position: absolute;\n      // top: 50px;\n      // right: 50px;\n      // margin-left: 16px;\n      // margin-top: 16px;\n      padding: 32px;\n      font-size: 32px;\n      width: 200px;\n      height: 100px;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      border-radius: 18px;\n  }\n  \n  #clock {\n    color: white;\n    font-size: 64px;\n    // width: 300px;\n    // height: 300px;\n    // z-index: 3;\n}";
   }
 
   _createClass(Chat, [{
@@ -70655,6 +70624,9 @@ var Chat = /*#__PURE__*/function () {
       document.body.innerHTML = "<style>".concat(this.css, "</style>") + this.html;
       document.querySelector("#upload-img").src = _assests_img_png__WEBPACK_IMPORTED_MODULE_0__;
       document.querySelector("#send").src = _assests_send_png__WEBPACK_IMPORTED_MODULE_1__;
+      document.querySelector("#upload-img-button").addEventListener("click", function () {
+        document.querySelector("#file-upload").click();
+      });
       document.querySelector("#send-button").addEventListener("click", function () {
         pubsub_js__WEBPACK_IMPORTED_MODULE_2___default().publish("msgSent", Parse.User.current()); // console.log(Parse.User.current());
       });
@@ -70664,6 +70636,7 @@ var Chat = /*#__PURE__*/function () {
         // document.body.style.minHeight = "-webkit-fill-available";
         document.body.style.minHeight = "calc(100vh - 130px)"; // document.body.style.maxHeight = "100vh";
       });
+      this.uploadFile();
       document.body.querySelector("#logout-button").addEventListener("click", function () {
         console.log("logout-requested");
         pubsub_js__WEBPACK_IMPORTED_MODULE_2___default().publish("logout-requested");
@@ -70693,7 +70666,7 @@ var Chat = /*#__PURE__*/function () {
       client.open();
 
       _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var query, results, _iterator, _step, message, body, _username, createdAt, msgClass;
+        var query, results, _iterator, _step, message, body, _username, createdAt, imgUrl, msgClass;
 
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
@@ -70719,6 +70692,7 @@ var Chat = /*#__PURE__*/function () {
                       _username = message.get("username");
                       createdAt = moment__WEBPACK_IMPORTED_MODULE_3___default()(message.createdAt).format("LT"); // console.log(myCustomKey1Name);
 
+                      imgUrl = message.get("img");
                       msgClass = ""; // debugger;
 
                       if (!(_username == Parse.User.current().get("username"))) {
@@ -70729,7 +70703,8 @@ var Chat = /*#__PURE__*/function () {
                         body: body,
                         username: _username,
                         createdAt: createdAt,
-                        msgClass: msgClass
+                        msgClass: msgClass,
+                        imgUrl: imgUrl
                       });
 
                       console.log(message);
@@ -70759,7 +70734,7 @@ var Chat = /*#__PURE__*/function () {
         console.log("On create event");
 
         _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-          var query, results, _iterator2, _step2, message, body, _username2, createdAt, msgClass;
+          var query, results, _iterator2, _step2, message, body, _username2, createdAt, imgUrl, msgClass;
 
           return _regeneratorRuntime().wrap(function _callee2$(_context2) {
             while (1) {
@@ -70790,6 +70765,7 @@ var Chat = /*#__PURE__*/function () {
                         _username2 = message.get("username");
                         createdAt = moment__WEBPACK_IMPORTED_MODULE_3___default()(message.createdAt).format("LT"); // console.log(myCustomKey1Name);
 
+                        imgUrl = message.get("img");
                         msgClass = ""; // debugger;
 
                         if (!(_username2 == Parse.User.current().get("username"))) {
@@ -70800,7 +70776,8 @@ var Chat = /*#__PURE__*/function () {
                           body: body,
                           username: _username2,
                           createdAt: createdAt,
-                          msgClass: msgClass
+                          msgClass: msgClass,
+                          imgUrl: imgUrl
                         });
 
                         console.log(message);
@@ -70829,39 +70806,22 @@ var Chat = /*#__PURE__*/function () {
       var body = _ref3.body,
           username = _ref3.username,
           createdAt = _ref3.createdAt,
-          msgClass = _ref3.msgClass;
-      document.body.querySelector("#chat-area").append(this.createElementFromHTML(this.getMsgHTML(body, username, createdAt, msgClass)));
-    }
-  }, {
-    key: "saveJobApp",
-    value: function saveJobApp(objParseFile) {
-      var jobApplication = new Parse.Object("JobApplication");
-      jobApplication.set("applicantName", "Joe Smith");
-      jobApplication.set("profileImg", objParseFile);
-      jobApplication.save(null, {
-        success: function success(gameScore) {
-          // Execute any logic that should take place after the object is saved.
-          var photo = gameScore.get("profileImg");
-          jquery__WEBPACK_IMPORTED_MODULE_4___default()("#profileImg")[0].src = photo.url();
-        },
-        error: function error(gameScore, _error2) {
-          // Execute any logic that should take place if the save fails.
-          // error is a Parse.Error with an error code and description.
-          alert("Failed to create new object, with error code: " + _error2.description);
-        }
-      });
+          msgClass = _ref3.msgClass,
+          imgUrl = _ref3.imgUrl;
+      // debugger;
+      document.body.querySelector("#chat-area").append(this.createElementFromHTML(this.getMsgHTML(body, username, createdAt, msgClass, imgUrl)));
     }
   }, {
     key: "uploadFile",
     value: function uploadFile() {
-      jquery__WEBPACK_IMPORTED_MODULE_4___default()("#profilePhotoFileUpload").bind("change", function (e) {
-        var fileUploadControl = jquery__WEBPACK_IMPORTED_MODULE_4___default()("#profilePhotoFileUpload")[0];
+      document.body.querySelector("#file-upload").addEventListener("change", function (e) {
+        var fileUploadControl = document.querySelector("#file-upload");
         var file = fileUploadControl.files[0];
         var name = file.name; //This does *NOT* need to be a unique name
 
         var parseFile = new Parse.File(name, file);
         parseFile.save().then(function () {
-          saveJobApp(parseFile);
+          Chat.saveImgMessage(parseFile);
         }, function (error) {
           alert("error");
         });
@@ -70879,8 +70839,79 @@ var Chat = /*#__PURE__*/function () {
     key: "getMsgHTML",
     value: function getMsgHTML(msgText, userName, sentAt) {
       var msgClass = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
-      return "\n    <div class=\"msg ".concat(msgClass, "\">\n      <div class=\"msg-wrapper\">\n        <p class=\"p-msg\">").concat(msgText, "</p>\n        <p class=\"user\">").concat(userName, " at ").concat(sentAt, "</p>\n      </div>\n    </div>\n  ");
+      var imgUrl = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+
+      if (userName == Parse.User.current().get("username")) {
+        userName = "You";
+      }
+
+      if (imgUrl) {
+        return "\n        <div class=\"msg ".concat(msgClass, "\">\n        <div class=\"msg-wrapper\">\n          <img class=\"image-msg\" src=").concat(imgUrl, ">\n          <p class=\"user\">").concat(userName, " at ").concat(sentAt, "</p>\n        </div>\n      </div>\n        ");
+      }
+
+      return "\n    <div class=\"msg ".concat(msgClass, "\">\n      <div class=\"msg-wrapper\">\n\n        <p class=\"p-msg\">").concat(msgText, "</p>\n        <p class=\"user\">").concat(userName, " at ").concat(sentAt, "</p>\n      </div>\n    </div>\n  ");
     }
+  }], [{
+    key: "saveImgMessage",
+    value: function () {
+      var _saveImgMessage = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(fileObject) {
+        var messageClass, message;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                messageClass = Parse.Object.extend("Message");
+                message = new messageClass();
+                message.set("img", fileObject.url()); // debugger;
+
+                message.set("username", Parse.User.current().get("username"));
+                message.set("body", "#"); // console.log(message);
+                // debugger;
+
+                message.save(); // const savedMessage = await message.save("");
+                // console.log(savedMessage);
+                // console.log({ username: Parse.User.current().get("username") });
+                // message.save("");
+                // { body: "", username: Parse.User.current().get("username") }
+                // {
+                //   success: function (savedMessage) {
+                //     // Execute any logic that should take place after the object is saved.
+                //     const photo = savedMessage.get("img");
+                //     this.addMsg({
+                //       body: "",
+                //       username: savedMessage.get("username"),
+                //       createdAt: savedMessage.createdAt,
+                //       msgClass:
+                //         savedMessage.get('username"') ==
+                //         Parse.User.current().get("username")
+                //           ? ""
+                //           : "other",
+                //       imgUrl: photo.url(),
+                //     });
+                //   },
+                //   error: function (gameScore, error) {
+                //     // Execute any logic that should take place if the save fails.
+                //     // error is a Parse.Error with an error code and description.
+                //     alert(
+                //       "Failed to create new object, with error code: " + error.description
+                //     );
+                //   },
+                // }
+
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }));
+
+      function saveImgMessage(_x) {
+        return _saveImgMessage.apply(this, arguments);
+      }
+
+      return saveImgMessage;
+    }()
   }]);
 
   return Chat;

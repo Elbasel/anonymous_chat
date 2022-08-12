@@ -41,6 +41,13 @@ h1 {
   font-size: 64px;
 }
 
+#file-upload {
+  position: absolute;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
 .chat-area {
   flex: 10;
   display: flex;
