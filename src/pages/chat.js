@@ -36,6 +36,7 @@ export default class Chat {
       display: flex;
       flex-direction: column;
       padding: 32px;
+      background-color: black;
   }
   
   #file-upload {

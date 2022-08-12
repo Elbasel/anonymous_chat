@@ -1,11 +1,12 @@
 import loadingGif from "../assests/loading.gif";
+import bgPNG from "../assests/bg.png";
 const PubSub = require("pubsub-js");
 const Parse = require("parse");
 
 export default class Home {
   constructor() {
     this.html = `
-    <h1>Super Chat!</h1>
+    <h1>Anonymous Chat!</h1>
     <div id="loading-div">
       <div class="loading">
         <h1>Logging in</h1>
@@ -32,9 +33,16 @@ export default class Home {
     </div>`;
 
     this.css = `
+
+
     body {
       display: flex;
       flex-direction: column;
+      background-image: url("${bgPNG}");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+  
   }
   
   h1 {
