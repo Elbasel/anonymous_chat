@@ -46,6 +46,8 @@ h1 {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
+  background-color: rgba(0, 0, 0, 0);
+  scroll-behavior: smooth;
 }
 
 .chat-area {

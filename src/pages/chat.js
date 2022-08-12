@@ -69,6 +69,7 @@ export default class Chat {
     margin-bottom: 100px;
     // border: 1px solid red;
     flex: 10;
+    scroll-behavior: smooth;
 
     display: flex;
     flex-direction: column;
@@ -121,6 +122,10 @@ html {
   
   .other > .msg-wrapper {
       background-color: blue;
+  }
+
+  .other > .img-msg-wrapper {
+    background-color: rgba(0, 0, 0, 0);
   }
   
   
@@ -211,7 +216,22 @@ html {
     // width: 300px;
     // height: 300px;
     // z-index: 3;
-}`;
+}
+
+.msg img {
+  flex: 1;
+  width: auto;
+  height: auto;
+}
+
+.img-msg-wrapper {
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid grey;
+  color: white; 
+  display: flex;
+  width: fit-content;
+}
+`;
   }
 
   init(username) {
@@ -352,6 +372,8 @@ html {
           this.getMsgHTML(body, username, createdAt, msgClass, imgUrl)
         )
       );
+    document.body.querySelector("#chat-area").scrollTop =
+      document.querySelector("#chat-area").scrollHeight;
   }
 
   static async saveImgMessage(fileObject) {
@@ -431,7 +453,7 @@ html {
     if (imgUrl) {
       return `
         <div class="msg ${msgClass}">
-        <div class="msg-wrapper">
+        <div class="msg-wrapper img-msg-wrapper">
           <img class="image-msg" src=${imgUrl}>
           <p class="user">${userName} at ${sentAt}</p>
         </div>
