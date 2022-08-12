@@ -1,8 +1,12 @@
 const Parse = require("parse");
 import "./styles/main.scss";
+import "./styles/chat.scss";
+
+// Pages
 import SignUpForm from "./pages/signUp";
 import Home from "./pages/home";
 import Chat from "./pages/chat";
+import PubSub from "pubsub-js";
 
 function initParse() {
   Parse.initialize(
@@ -47,6 +51,22 @@ function initSite() {
     document.body.innerHTML = "";
     localStorage.clear(home.init());
   });
-}
 
+  PubSub.subscribe("msgSent", async (pubsubMsg, user) => {
+    const username = user.get("username");
+    let body = document.querySelector("#text").value;
+    console.log(body);
+    if (!body) body = "#";
+    const msgClass = Parse.Object.extend("Message");
+    // debugger;
+    const msg = new msgClass();
+    const savedMsg = await msg.save({ body: body, username: username });
+    console.log({ savedMsg });
+    PubSub.publish("msgSaved", savedMsg);
+    document.querySelector("#text").value = "";
+  });
+}
+// initParse();
 initSite();
+// const chat = new Chat();
+// chat.init();
