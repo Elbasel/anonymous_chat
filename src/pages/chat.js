@@ -17,7 +17,7 @@ export default class Chat {
     this.html = `
     <div class="header-area">
     <h1>Hello</h1>
-    <div id="clock">1:00 PM</div>
+    // <div id="clock">1:00 PM</div>
     <button id="logout-button">Logout</button>
   </div>
   <div id="chat-area">
@@ -287,9 +287,9 @@ html {
     //   document.querySelector("#text").value = "";
     // });
 
-    setInterval(() => {
-      document.querySelector("#clock").textContent = moment().format("LT");
-    }, 1000);
+    // setInterval(() => {
+    //   document.querySelector("#clock").textContent = moment().format("LT");
+    // }, 1000);
 
     var client = new Parse.LiveQueryClient({
       applicationId: "z6wry3r4l7uk3P0tWQsOtMz3FB4ifkOqHvkHEbWv",
