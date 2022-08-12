@@ -6,30 +6,20 @@
   </head>
   <body>
     <div class="header-area">
-      <h1>Hello Elbasel</h1>
+      <h1>Hello</h1>
       <div id="clock">1:00 PM</div>
       <button id="logout-button">Logout</button>
     </div>
-    <div id="chat-area">
-      <div class="msg">
-        <div class="msg-wrapper">
-          <p class="p-msg">Hello!</p>
-          <p class="user">elbasel at 5:00 pm</p>
-        </div>
-      </div>
-      <div class="msg other">
-        <div class="msg-wrapper">
-          <p class="p-msg">Hello!</p>
-          <p class="user">elbasel at 5:00 pm</p>
-        </div>
-      </div>
-    </div>
+    <div id="chat-area"></div>
     <div class="msg-area">
-      <button id="upload-img-button" class="msg-button">
-        <img id="upload-img" />
-      </button>
-      <input id="text" type="text" />
-      <button id="send-button" class="msg-button"><img id="send" /></button>
+      <form action="" class="send-msg-form">
+        <button id="upload-img-button" class="msg-button">
+          <img id="upload-img" />
+        </button>
+        <input type="file" name="file-upload" id="file-upload" />
+        <input id="text" type="text" />
+        <button id="send-button" class="msg-button"><img id="send" /></button>
+      </form>
     </div>
   </body>
 </html>

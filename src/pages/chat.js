@@ -7,6 +7,13 @@ const Parse = require("parse");
 
 export default class Chat {
   constructor() {
+    // this.messages = localStorage.getItem("currentMessages") || [];
+    // try {
+    //   this.messages = JSON.parse(this.messages);
+    // } catch (error) {
+    //   console.log({ error });
+    // }
+
     this.html = `
     <div class="header-area">
     <h1>Hello</h1>
@@ -14,18 +21,7 @@ export default class Chat {
     <button id="logout-button">Logout</button>
   </div>
   <div id="chat-area">
-    <div class="msg">
-      <div class="msg-wrapper">
-        <p class="p-msg">Hello!</p>
-        <p class="user">elbasel at 5:00 pm</p>
-      </div>
-    </div>
-    <div class="msg other">
-      <div class="msg-wrapper">
-        <p class="p-msg">Hello!</p>
-        <p class="user">elbasel at 5:00 pm</p>
-      </div>
-    </div>
+
   </div>
   <div class="msg-area">
     <button id="upload-img-button" class="msg-button"><img id="upload-img" /></button>
@@ -70,7 +66,7 @@ export default class Chat {
     // border: 1px solid red;
     flex: 10;
     scroll-behavior: smooth;
-
+    max-height: 60vh;
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -103,6 +99,7 @@ html {
       font-size: 48px;
       display: flex;
       justify-content: flex-end;
+      // max-width: 50%;
   }
   
   
@@ -117,6 +114,7 @@ html {
       display: flex;
       flex-direction: column;
       gap: 16px;
+      max-width: 50%;
   
   }
   
@@ -125,13 +123,14 @@ html {
   }
 
   .other > .img-msg-wrapper {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 255, 0.075);
   }
   
   
   .user {
       font-size: 32px;
-      color: rgba(0, 0, 0, 0.788);
+      colo// query.equalTo('objectId', 'xKue915KBG');
+      chatr: rgba(0, 0, 0, 0.788);
       font-style: italic;
   }
   
@@ -175,7 +174,7 @@ html {
       color: white;
   }
   
-  img {
+  button > img {
       fill: white;
       color: white;
       flex: 1;
@@ -219,9 +218,11 @@ html {
 }
 
 .msg img {
-  flex: 1;
-  width: auto;
-  height: auto;
+  // flex: 1;
+  // width: auto;
+  // height: auto;
+  border-radius: 18px;
+  max-width: 100%;
 }
 
 .img-msg-wrapper {
@@ -229,12 +230,15 @@ html {
   border: 1px solid grey;
   color: white; 
   display: flex;
-  width: fit-content;
+  // width: 100vw;
+  background-color: rgba(255, 0, 0, 0.116);
+
+  // width: fit-content;
 }
 `;
   }
 
-  init(username) {
+  async init(username) {
     document.body.innerHTML = `<style>${this.css}</style>` + this.html;
     document.querySelector("#upload-img").src = UploadImgPng;
     document.querySelector("#send").src = sendImgPng;
@@ -296,10 +300,12 @@ html {
     (async () => {
       const query = new Parse.Query("Message").ascending("createdAt");
       let results = await query.find();
-      results = results.slice(-5);
+
+      // localStorage.setItem("cachedMsgs", JSON.stringify(results));
+      // results = results.slice(-5);
 
       try {
-        document.body.querySelector("#chat-area").innerHTML = "";
+        // document.body.querySelector("#chat-area").innerHTML = "";
         for (const message of results) {
           // Access the Parse Object attributes using the .GET method
           const body = message.get("body");
@@ -314,29 +320,52 @@ html {
           }
           this.addMsg({ body, username, createdAt, msgClass, imgUrl });
 
-          console.log(message);
+          // console.log(message);
         }
+        // document.querySelector("#chat-area").lastChild.scrollIntoView();
       } catch (error) {
         console.error("Error while fetching messages", error);
       }
     })();
+
     const Message = Parse.Object.extend("Message");
     var query = new Parse.Query("Message").ascending("createdAt");
     let subscription = client.subscribe(query);
 
     subscription.on("create", (msg) => {
-      console.log(msg);
-      console.log("On create event");
+      // console.log(msg);
+      // console.log("On create event");
 
       (async () => {
         const query = new Parse.Query("Message").ascending("createdAt");
 
         // You can also query by using a parameter of an object
         // query.equalTo('objectId', 'xKue915KBG');
-        let results = await query.find();
-        console.log({ results });
 
-        results = results.slice(-5);
+        // this.messages = JSON.parse(localStorage.getItem("currentMessages"));
+        // console.log({ msgs: this.messages });
+
+        // var msgs = this.messages;
+        // let cachedMsgs = JSON.parse(localStorage.getItem("cachedMsgs"));
+        let results = await query.find();
+        // debugger;
+
+        // results = results.filter((msg) => {
+        //   for (const cachedMsg of cachedMsgs) {
+        //     if (cachedMsg.ObjectId == msg.id) {
+        //       return false;
+        //     }
+        //   }
+        //   return true;
+        // });
+        // debugger;
+        // localStorage.setItem("cachedMsgs", JSON.stringify(results));
+        // console.log({ results });
+        // debugger;
+
+        // this.messages += results;
+        // localStorage.setItem("currentMessages", JSON.stringify(this.messages));
+        // results = results.slice(-5);
 
         try {
           document.body.querySelector("#chat-area").innerHTML = "";
@@ -354,13 +383,18 @@ html {
             }
             this.addMsg({ body, username, createdAt, msgClass, imgUrl });
 
-            console.log(message);
+            // console.log(message);
           }
+          document.body.querySelector("#chat-area").scrollTop =
+            document.querySelector("#chat-area").scrollHeight;
         } catch (error) {
           console.error("Error while fetching messages", error);
         }
       })();
     });
+    let query2 = new Parse.Query("Message").ascending("createdAt");
+
+    this.messages = await query2.find();
   }
 
   addMsg({ body, username, createdAt, msgClass, imgUrl }) {
@@ -372,8 +406,8 @@ html {
           this.getMsgHTML(body, username, createdAt, msgClass, imgUrl)
         )
       );
-    document.body.querySelector("#chat-area").scrollTop =
-      document.querySelector("#chat-area").scrollHeight;
+    // document.body.querySelector("#chat-area").scrollTop =
+    // document.querySelector("#chat-area").scrollHeight;
   }
 
   static async saveImgMessage(fileObject) {

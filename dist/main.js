@@ -70612,194 +70612,243 @@ var Chat = /*#__PURE__*/function () {
   function Chat() {
     _classCallCheck(this, Chat);
 
-    this.html = "\n    <div class=\"header-area\">\n    <h1>Hello</h1>\n    <div id=\"clock\">1:00 PM</div>\n    <button id=\"logout-button\">Logout</button>\n  </div>\n  <div id=\"chat-area\">\n    <div class=\"msg\">\n      <div class=\"msg-wrapper\">\n        <p class=\"p-msg\">Hello!</p>\n        <p class=\"user\">elbasel at 5:00 pm</p>\n      </div>\n    </div>\n    <div class=\"msg other\">\n      <div class=\"msg-wrapper\">\n        <p class=\"p-msg\">Hello!</p>\n        <p class=\"user\">elbasel at 5:00 pm</p>\n      </div>\n    </div>\n  </div>\n  <div class=\"msg-area\">\n    <button id=\"upload-img-button\" class=\"msg-button\"><img id=\"upload-img\" /></button>\n    <input type=\"file\" name=\"file-upload\" id=\"file-upload\">\n    <input id=\"text\" type=\"text\" />\n    <button id=\"send-button\" class=\"msg-button\"><img id=\"send\" /></button>\n  </div>\n  ";
-    this.css = "\n    body {\n      display: flex;\n      flex-direction: column;\n      padding: 32px;\n  }\n  \n  #file-upload {\n    position: absolute;\n    appearance: none;\n    display: none;\n\n}\n\n\n  .header-area {\n      flex: 1;\n      display: flex;\n      justify-content: space-between;\n      border-bottom: 1px solid white;\n      align-items: center;\n      padding: 32px;\n      max-height: 200px;\n  }\n  \n  h1 {\n      font-size: 64px;\n  }\n  \n  #chat-area {\n    margin-top: 100px;\n    margin-bottom: 100px;\n    // border: 1px solid red;\n    flex: 10;\n    scroll-behavior: smooth;\n\n    display: flex;\n    flex-direction: column;\n    gap: 32px;\n    padding: 32px;\n    overflow-y: scroll;\n    overflow-x: hidden;\n\n}\nhtml {\n  scrollbar-face-color: #646464;\n  scrollbar-base-color: #646464;\n  scrollbar-3dlight-color: #646464;\n  scrollbar-highlight-color: #646464;\n  scrollbar-track-color: #000;\n  scrollbar-arrow-color: #000;\n  scrollbar-shadow-color: #646464;\n  scrollbar-dark-shadow-color: #646464;\n}\n\n::-webkit-scrollbar { width: 8px; height: 3px;}\n::-webkit-scrollbar-button {  background-color: #666; }\n::-webkit-scrollbar-track {  background-color: #646464;}\n::-webkit-scrollbar-track-piece { background-color: #000;}\n::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}\n::-webkit-scrollbar-corner { background-color: #646464;}}\n::-webkit-resizer { background-color: #666;}\n  \n  .msg {\n      // border: 1px solid white;\n      font-size: 48px;\n      display: flex;\n      justify-content: flex-end;\n  }\n  \n  \n  .other {\n      justify-content: flex-start;\n  }\n  \n  .msg-wrapper {\n      background-color: red;\n      border-radius: 32px;\n      padding: 32px;\n      display: flex;\n      flex-direction: column;\n      gap: 16px;\n  \n  }\n  \n  .other > .msg-wrapper {\n      background-color: blue;\n  }\n\n  .other > .img-msg-wrapper {\n    background-color: rgba(0, 0, 0, 0);\n  }\n  \n  \n  .user {\n      font-size: 32px;\n      color: rgba(0, 0, 0, 0.788);\n      font-style: italic;\n  }\n  \n  .msg-area {\n      flex: 1;\n      display: flex;\n      // border-top: 1px solid white;\n      // padding: 32px;\n  \n      gap: 32px;\n  \n      align-items: center;\n  \n  \n  }\n  html {\n    scrollbar-face-color: #646464;\n    scrollbar-base-color: #646464;\n    scrollbar-3dlight-color: #646464;\n    scrollbar-highlight-color: #646464;\n    scrollbar-track-color: #000;\n    scrollbar-arrow-color: #000;\n    scrollbar-shadow-color: #646464;\n    scrollbar-dark-shadow-color: #646464;\n  }\n  \n  ::-webkit-scrollbar { width: 8px; height: 3px;}\n  ::-webkit-scrollbar-button {  background-color: #666; }\n  ::-webkit-scrollbar-track {  background-color: #646464;}\n  ::-webkit-scrollbar-track-piece { background-color: #000;}\n  ::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}\n  ::-webkit-scrollbar-corner { background-color: #646464;}}\n  ::-webkit-resizer { background-color: #666;}\n  .msg-button {\n      flex: 1;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      background-color: rgba(255, 255, 255, 0);\n      border: 0;\n      color: white;\n  }\n  \n  img {\n      fill: white;\n      color: white;\n      flex: 1;\n      // width: 30%;\n      // height: 100%;\n      max-width: 300px;\n      max-height: 300px;\n  }\n  \n  \n  input {\n      height:100px;\n      border-radius: 18px;\n      flex: 5;\n      padding: 32px;\n      font-size: 42px;\n  }\n  \n  #logout-button {\n      // position: absolute;\n      // top: 50px;\n      // right: 50px;\n      // margin-left: 16px;\n      // margin-top: 16px;\n      padding: 32px;\n      font-size: 32px;\n      width: 200px;\n      height: 100px;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      border-radius: 18px;\n  }\n  \n  #clock {\n    color: white;\n    font-size: 64px;\n    // width: 300px;\n    // height: 300px;\n    // z-index: 3;\n}\n\n.msg img {\n  flex: 1;\n  width: auto;\n  height: auto;\n}\n\n.img-msg-wrapper {\n  background-color: rgba(0, 0, 0, 0);\n  border: 1px solid grey;\n  color: white; \n  display: flex;\n  width: fit-content;\n}\n";
+    // this.messages = localStorage.getItem("currentMessages") || [];
+    // try {
+    //   this.messages = JSON.parse(this.messages);
+    // } catch (error) {
+    //   console.log({ error });
+    // }
+    this.html = "\n    <div class=\"header-area\">\n    <h1>Hello</h1>\n    <div id=\"clock\">1:00 PM</div>\n    <button id=\"logout-button\">Logout</button>\n  </div>\n  <div id=\"chat-area\">\n\n  </div>\n  <div class=\"msg-area\">\n    <button id=\"upload-img-button\" class=\"msg-button\"><img id=\"upload-img\" /></button>\n    <input type=\"file\" name=\"file-upload\" id=\"file-upload\">\n    <input id=\"text\" type=\"text\" />\n    <button id=\"send-button\" class=\"msg-button\"><img id=\"send\" /></button>\n  </div>\n  ";
+    this.css = "\n    body {\n      display: flex;\n      flex-direction: column;\n      padding: 32px;\n  }\n  \n  #file-upload {\n    position: absolute;\n    appearance: none;\n    display: none;\n\n}\n\n\n  .header-area {\n      flex: 1;\n      display: flex;\n      justify-content: space-between;\n      border-bottom: 1px solid white;\n      align-items: center;\n      padding: 32px;\n      max-height: 200px;\n  }\n  \n  h1 {\n      font-size: 64px;\n  }\n  \n  #chat-area {\n    margin-top: 100px;\n    margin-bottom: 100px;\n    // border: 1px solid red;\n    flex: 10;\n    scroll-behavior: smooth;\n    max-height: 60vh;\n    display: flex;\n    flex-direction: column;\n    gap: 32px;\n    padding: 32px;\n    overflow-y: scroll;\n    overflow-x: hidden;\n\n}\nhtml {\n  scrollbar-face-color: #646464;\n  scrollbar-base-color: #646464;\n  scrollbar-3dlight-color: #646464;\n  scrollbar-highlight-color: #646464;\n  scrollbar-track-color: #000;\n  scrollbar-arrow-color: #000;\n  scrollbar-shadow-color: #646464;\n  scrollbar-dark-shadow-color: #646464;\n}\n\n::-webkit-scrollbar { width: 8px; height: 3px;}\n::-webkit-scrollbar-button {  background-color: #666; }\n::-webkit-scrollbar-track {  background-color: #646464;}\n::-webkit-scrollbar-track-piece { background-color: #000;}\n::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}\n::-webkit-scrollbar-corner { background-color: #646464;}}\n::-webkit-resizer { background-color: #666;}\n  \n  .msg {\n      // border: 1px solid white;\n      font-size: 48px;\n      display: flex;\n      justify-content: flex-end;\n      // max-width: 50%;\n  }\n  \n  \n  .other {\n      justify-content: flex-start;\n  }\n  \n  .msg-wrapper {\n      background-color: red;\n      border-radius: 32px;\n      padding: 32px;\n      display: flex;\n      flex-direction: column;\n      gap: 16px;\n      max-width: 50%;\n  \n  }\n  \n  .other > .msg-wrapper {\n      background-color: blue;\n  }\n\n  .other > .img-msg-wrapper {\n    background-color: rgba(0, 0, 255, 0.075);\n  }\n  \n  \n  .user {\n      font-size: 32px;\n      colo// query.equalTo('objectId', 'xKue915KBG');\n      chatr: rgba(0, 0, 0, 0.788);\n      font-style: italic;\n  }\n  \n  .msg-area {\n      flex: 1;\n      display: flex;\n      // border-top: 1px solid white;\n      // padding: 32px;\n  \n      gap: 32px;\n  \n      align-items: center;\n  \n  \n  }\n  html {\n    scrollbar-face-color: #646464;\n    scrollbar-base-color: #646464;\n    scrollbar-3dlight-color: #646464;\n    scrollbar-highlight-color: #646464;\n    scrollbar-track-color: #000;\n    scrollbar-arrow-color: #000;\n    scrollbar-shadow-color: #646464;\n    scrollbar-dark-shadow-color: #646464;\n  }\n  \n  ::-webkit-scrollbar { width: 8px; height: 3px;}\n  ::-webkit-scrollbar-button {  background-color: #666; }\n  ::-webkit-scrollbar-track {  background-color: #646464;}\n  ::-webkit-scrollbar-track-piece { background-color: #000;}\n  ::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}\n  ::-webkit-scrollbar-corner { background-color: #646464;}}\n  ::-webkit-resizer { background-color: #666;}\n  .msg-button {\n      flex: 1;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      background-color: rgba(255, 255, 255, 0);\n      border: 0;\n      color: white;\n  }\n  \n  button > img {\n      fill: white;\n      color: white;\n      flex: 1;\n      // width: 30%;\n      // height: 100%;\n      max-width: 300px;\n      max-height: 300px;\n  }\n  \n  \n  input {\n      height:100px;\n      border-radius: 18px;\n      flex: 5;\n      padding: 32px;\n      font-size: 42px;\n  }\n  \n  #logout-button {\n      // position: absolute;\n      // top: 50px;\n      // right: 50px;\n      // margin-left: 16px;\n      // margin-top: 16px;\n      padding: 32px;\n      font-size: 32px;\n      width: 200px;\n      height: 100px;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      border-radius: 18px;\n  }\n  \n  #clock {\n    color: white;\n    font-size: 64px;\n    // width: 300px;\n    // height: 300px;\n    // z-index: 3;\n}\n\n.msg img {\n  // flex: 1;\n  // width: auto;\n  // height: auto;\n  border-radius: 18px;\n  max-width: 100%;\n}\n\n.img-msg-wrapper {\n  background-color: rgba(0, 0, 0, 0);\n  border: 1px solid grey;\n  color: white; \n  display: flex;\n  // width: 100vw;\n  background-color: rgba(255, 0, 0, 0.116);\n\n  // width: fit-content;\n}\n";
   }
 
   _createClass(Chat, [{
     key: "init",
-    value: function init(username) {
-      var _this = this;
+    value: function () {
+      var _init = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(username) {
+        var _this = this;
 
-      document.body.innerHTML = "<style>".concat(this.css, "</style>") + this.html;
-      document.querySelector("#upload-img").src = _assests_img_png__WEBPACK_IMPORTED_MODULE_0__;
-      document.querySelector("#send").src = _assests_send_png__WEBPACK_IMPORTED_MODULE_1__;
-      document.querySelector("#upload-img-button").addEventListener("click", function () {
-        document.querySelector("#file-upload").click();
-      });
-      document.querySelector("#send-button").addEventListener("click", function () {
-        pubsub_js__WEBPACK_IMPORTED_MODULE_2___default().publish("msgSent", Parse.User.current()); // console.log(Parse.User.current());
-      });
-      document.querySelector("h1").innerText += " ".concat(username);
-      document.body.querySelector("#text").addEventListener("focusout", function () {
-        // document.style.height = "-webkit-fill-available";
-        // document.body.style.minHeight = "-webkit-fill-available";
-        document.body.style.minHeight = "calc(100vh - 130px)"; // document.body.style.maxHeight = "100vh";
-      });
-      this.uploadFile();
-      document.body.querySelector("#logout-button").addEventListener("click", function () {
-        console.log("logout-requested");
-        pubsub_js__WEBPACK_IMPORTED_MODULE_2___default().publish("logout-requested");
-      }); // PubSub.subscribe("msgSaved", (pubsubMsg, msg) => {
-      //   const msgHTML = this.getMsgHTML(
-      //     msg.get("body"),
-      //     msg.get("username"),
-      //     moment(msg.createdAt).format("LT")
-      //   );
-      //   // debugger;
-      //   // console.log(msgHTML);
-      //   document.body
-      //     .querySelector(".chat-area")
-      //     .append(this.createElementFromHTML(msgHTML));
-      //   document.querySelector("#text").value = "";
-      // });
-
-      setInterval(function () {
-        document.querySelector("#clock").textContent = moment__WEBPACK_IMPORTED_MODULE_3___default()().format("LT");
-      }, 1000);
-      var client = new Parse.LiveQueryClient({
-        applicationId: "z6wry3r4l7uk3P0tWQsOtMz3FB4ifkOqHvkHEbWv",
-        serverURL: "wss://" + "elbaselmessage.b4a.io",
-        // Example: 'wss://livequerytutorial.back4app.io'
-        javascriptKey: "Pr22k3Z6IN5RGOwdr7adFcF0e1kQsamhe6bi2F4e"
-      });
-      client.open();
-
-      _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var query, results, _iterator, _step, message, body, _username, createdAt, imgUrl, msgClass;
-
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
+        var client, Message, query, subscription, query2;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                query = new Parse.Query("Message").ascending("createdAt");
-                _context.next = 3;
-                return query.find();
+                document.body.innerHTML = "<style>".concat(this.css, "</style>") + this.html;
+                document.querySelector("#upload-img").src = _assests_img_png__WEBPACK_IMPORTED_MODULE_0__;
+                document.querySelector("#send").src = _assests_send_png__WEBPACK_IMPORTED_MODULE_1__;
+                document.querySelector("#upload-img-button").addEventListener("click", function () {
+                  document.querySelector("#file-upload").click();
+                });
+                document.querySelector("#send-button").addEventListener("click", function () {
+                  pubsub_js__WEBPACK_IMPORTED_MODULE_2___default().publish("msgSent", Parse.User.current()); // console.log(Parse.User.current());
+                });
+                document.querySelector("h1").innerText += " ".concat(username);
+                document.body.querySelector("#text").addEventListener("focusout", function () {
+                  // document.style.height = "-webkit-fill-available";
+                  // document.body.style.minHeight = "-webkit-fill-available";
+                  document.body.style.minHeight = "calc(100vh - 130px)"; // document.body.style.maxHeight = "100vh";
+                });
+                this.uploadFile();
+                document.body.querySelector("#logout-button").addEventListener("click", function () {
+                  console.log("logout-requested");
+                  pubsub_js__WEBPACK_IMPORTED_MODULE_2___default().publish("logout-requested");
+                }); // PubSub.subscribe("msgSaved", (pubsubMsg, msg) => {
+                //   const msgHTML = this.getMsgHTML(
+                //     msg.get("body"),
+                //     msg.get("username"),
+                //     moment(msg.createdAt).format("LT")
+                //   );
+                //   // debugger;
+                //   // console.log(msgHTML);
+                //   document.body
+                //     .querySelector(".chat-area")
+                //     .append(this.createElementFromHTML(msgHTML));
+                //   document.querySelector("#text").value = "";
+                // });
 
-              case 3:
-                results = _context.sent;
-                results = results.slice(-5);
+                setInterval(function () {
+                  document.querySelector("#clock").textContent = moment__WEBPACK_IMPORTED_MODULE_3___default()().format("LT");
+                }, 1000);
+                client = new Parse.LiveQueryClient({
+                  applicationId: "z6wry3r4l7uk3P0tWQsOtMz3FB4ifkOqHvkHEbWv",
+                  serverURL: "wss://" + "elbaselmessage.b4a.io",
+                  // Example: 'wss://livequerytutorial.back4app.io'
+                  javascriptKey: "Pr22k3Z6IN5RGOwdr7adFcF0e1kQsamhe6bi2F4e"
+                });
+                client.open();
 
-                try {
-                  document.body.querySelector("#chat-area").innerHTML = "";
-                  _iterator = _createForOfIteratorHelper(results);
+                _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+                  var query, results, _iterator, _step, message, body, _username, createdAt, imgUrl, msgClass;
 
-                  try {
-                    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-                      message = _step.value;
-                      // Access the Parse Object attributes using the .GET method
-                      body = message.get("body");
-                      _username = message.get("username");
-                      createdAt = moment__WEBPACK_IMPORTED_MODULE_3___default()(message.createdAt).format("LT"); // console.log(myCustomKey1Name);
+                  return _regeneratorRuntime().wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          query = new Parse.Query("Message").ascending("createdAt");
+                          _context.next = 3;
+                          return query.find();
 
-                      imgUrl = message.get("img");
-                      msgClass = ""; // debugger;
+                        case 3:
+                          results = _context.sent;
 
-                      if (!(_username == Parse.User.current().get("username"))) {
-                        msgClass = "other";
+                          // localStorage.setItem("cachedMsgs", JSON.stringify(results));
+                          // results = results.slice(-5);
+                          try {
+                            // document.body.querySelector("#chat-area").innerHTML = "";
+                            _iterator = _createForOfIteratorHelper(results);
+
+                            try {
+                              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                                message = _step.value;
+                                // Access the Parse Object attributes using the .GET method
+                                body = message.get("body");
+                                _username = message.get("username");
+                                createdAt = moment__WEBPACK_IMPORTED_MODULE_3___default()(message.createdAt).format("LT"); // console.log(myCustomKey1Name);
+
+                                imgUrl = message.get("img");
+                                msgClass = ""; // debugger;
+
+                                if (!(_username == Parse.User.current().get("username"))) {
+                                  msgClass = "other";
+                                }
+
+                                _this.addMsg({
+                                  body: body,
+                                  username: _username,
+                                  createdAt: createdAt,
+                                  msgClass: msgClass,
+                                  imgUrl: imgUrl
+                                }); // console.log(message);
+
+                              } // document.querySelector("#chat-area").lastChild.scrollIntoView();
+
+                            } catch (err) {
+                              _iterator.e(err);
+                            } finally {
+                              _iterator.f();
+                            }
+                          } catch (error) {
+                            console.error("Error while fetching messages", error);
+                          }
+
+                        case 5:
+                        case "end":
+                          return _context.stop();
                       }
-
-                      _this.addMsg({
-                        body: body,
-                        username: _username,
-                        createdAt: createdAt,
-                        msgClass: msgClass,
-                        imgUrl: imgUrl
-                      });
-
-                      console.log(message);
                     }
-                  } catch (err) {
-                    _iterator.e(err);
-                  } finally {
-                    _iterator.f();
-                  }
-                } catch (error) {
-                  console.error("Error while fetching messages", error);
-                }
+                  }, _callee);
+                }))();
 
-              case 6:
+                Message = Parse.Object.extend("Message");
+                query = new Parse.Query("Message").ascending("createdAt");
+                subscription = client.subscribe(query);
+                subscription.on("create", function (msg) {
+                  // console.log(msg);
+                  // console.log("On create event");
+                  _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+                    var query, results, _iterator2, _step2, message, body, _username2, createdAt, imgUrl, msgClass;
+
+                    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+                      while (1) {
+                        switch (_context2.prev = _context2.next) {
+                          case 0:
+                            query = new Parse.Query("Message").ascending("createdAt"); // You can also query by using a parameter of an object
+                            // query.equalTo('objectId', 'xKue915KBG');
+                            // this.messages = JSON.parse(localStorage.getItem("currentMessages"));
+                            // console.log({ msgs: this.messages });
+                            // var msgs = this.messages;
+                            // let cachedMsgs = JSON.parse(localStorage.getItem("cachedMsgs"));
+
+                            _context2.next = 3;
+                            return query.find();
+
+                          case 3:
+                            results = _context2.sent;
+
+                            // debugger;
+                            // results = results.filter((msg) => {
+                            //   for (const cachedMsg of cachedMsgs) {
+                            //     if (cachedMsg.ObjectId == msg.id) {
+                            //       return false;
+                            //     }
+                            //   }
+                            //   return true;
+                            // });
+                            // debugger;
+                            // localStorage.setItem("cachedMsgs", JSON.stringify(results));
+                            // console.log({ results });
+                            // debugger;
+                            // this.messages += results;
+                            // localStorage.setItem("currentMessages", JSON.stringify(this.messages));
+                            // results = results.slice(-5);
+                            try {
+                              document.body.querySelector("#chat-area").innerHTML = "";
+                              _iterator2 = _createForOfIteratorHelper(results);
+
+                              try {
+                                for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                                  message = _step2.value;
+                                  // Access the Parse Object attributes using the .GET method
+                                  body = message.get("body");
+                                  _username2 = message.get("username");
+                                  createdAt = moment__WEBPACK_IMPORTED_MODULE_3___default()(message.createdAt).format("LT"); // console.log(myCustomKey1Name);
+
+                                  imgUrl = message.get("img");
+                                  msgClass = ""; // debugger;
+
+                                  if (!(_username2 == Parse.User.current().get("username"))) {
+                                    msgClass = "other";
+                                  }
+
+                                  _this.addMsg({
+                                    body: body,
+                                    username: _username2,
+                                    createdAt: createdAt,
+                                    msgClass: msgClass,
+                                    imgUrl: imgUrl
+                                  }); // console.log(message);
+
+                                }
+                              } catch (err) {
+                                _iterator2.e(err);
+                              } finally {
+                                _iterator2.f();
+                              }
+
+                              document.body.querySelector("#chat-area").scrollTop = document.querySelector("#chat-area").scrollHeight;
+                            } catch (error) {
+                              console.error("Error while fetching messages", error);
+                            }
+
+                          case 5:
+                          case "end":
+                            return _context2.stop();
+                        }
+                      }
+                    }, _callee2);
+                  }))();
+                });
+                query2 = new Parse.Query("Message").ascending("createdAt");
+                _context3.next = 20;
+                return query2.find();
+
+              case 20:
+                this.messages = _context3.sent;
+
+              case 21:
               case "end":
-                return _context.stop();
+                return _context3.stop();
             }
           }
-        }, _callee);
-      }))();
+        }, _callee3, this);
+      }));
 
-      var Message = Parse.Object.extend("Message");
-      var query = new Parse.Query("Message").ascending("createdAt");
-      var subscription = client.subscribe(query);
-      subscription.on("create", function (msg) {
-        console.log(msg);
-        console.log("On create event");
+      function init(_x) {
+        return _init.apply(this, arguments);
+      }
 
-        _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-          var query, results, _iterator2, _step2, message, body, _username2, createdAt, imgUrl, msgClass;
-
-          return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  query = new Parse.Query("Message").ascending("createdAt"); // You can also query by using a parameter of an object
-                  // query.equalTo('objectId', 'xKue915KBG');
-
-                  _context2.next = 3;
-                  return query.find();
-
-                case 3:
-                  results = _context2.sent;
-                  console.log({
-                    results: results
-                  });
-                  results = results.slice(-5);
-
-                  try {
-                    document.body.querySelector("#chat-area").innerHTML = "";
-                    _iterator2 = _createForOfIteratorHelper(results);
-
-                    try {
-                      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-                        message = _step2.value;
-                        // Access the Parse Object attributes using the .GET method
-                        body = message.get("body");
-                        _username2 = message.get("username");
-                        createdAt = moment__WEBPACK_IMPORTED_MODULE_3___default()(message.createdAt).format("LT"); // console.log(myCustomKey1Name);
-
-                        imgUrl = message.get("img");
-                        msgClass = ""; // debugger;
-
-                        if (!(_username2 == Parse.User.current().get("username"))) {
-                          msgClass = "other";
-                        }
-
-                        _this.addMsg({
-                          body: body,
-                          username: _username2,
-                          createdAt: createdAt,
-                          msgClass: msgClass,
-                          imgUrl: imgUrl
-                        });
-
-                        console.log(message);
-                      }
-                    } catch (err) {
-                      _iterator2.e(err);
-                    } finally {
-                      _iterator2.f();
-                    }
-                  } catch (error) {
-                    console.error("Error while fetching messages", error);
-                  }
-
-                case 7:
-                case "end":
-                  return _context2.stop();
-              }
-            }
-          }, _callee2);
-        }))();
-      });
-    }
+      return init;
+    }()
   }, {
     key: "addMsg",
     value: function addMsg(_ref3) {
@@ -70809,8 +70858,8 @@ var Chat = /*#__PURE__*/function () {
           msgClass = _ref3.msgClass,
           imgUrl = _ref3.imgUrl;
       // debugger;
-      document.body.querySelector("#chat-area").append(this.createElementFromHTML(this.getMsgHTML(body, username, createdAt, msgClass, imgUrl)));
-      document.body.querySelector("#chat-area").scrollTop = document.querySelector("#chat-area").scrollHeight;
+      document.body.querySelector("#chat-area").append(this.createElementFromHTML(this.getMsgHTML(body, username, createdAt, msgClass, imgUrl))); // document.body.querySelector("#chat-area").scrollTop =
+      // document.querySelector("#chat-area").scrollHeight;
     }
   }, {
     key: "uploadFile",
@@ -70855,11 +70904,11 @@ var Chat = /*#__PURE__*/function () {
   }], [{
     key: "saveImgMessage",
     value: function () {
-      var _saveImgMessage = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(fileObject) {
+      var _saveImgMessage = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(fileObject) {
         var messageClass, message;
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 messageClass = Parse.Object.extend("Message");
                 message = new messageClass();
@@ -70901,13 +70950,13 @@ var Chat = /*#__PURE__*/function () {
 
               case 6:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       }));
 
-      function saveImgMessage(_x) {
+      function saveImgMessage(_x2) {
         return _saveImgMessage.apply(this, arguments);
       }
 
@@ -71175,19 +71224,6 @@ var SignUpForm = /*#__PURE__*/function () {
   return SignUpForm;
 }();
 
-
-
-/***/ }),
-
-/***/ "./src/styles/chat.scss":
-/*!******************************!*\
-  !*** ./src/styles/chat.scss ***!
-  \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
 
 
 /***/ }),
@@ -71933,12 +71969,11 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles/main.scss */ "./src/styles/main.scss");
-/* harmony import */ var _styles_chat_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles/chat.scss */ "./src/styles/chat.scss");
-/* harmony import */ var _pages_signUp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/signUp */ "./src/pages/signUp.js");
-/* harmony import */ var _pages_home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/home */ "./src/pages/home.js");
-/* harmony import */ var _pages_chat__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/chat */ "./src/pages/chat.js");
-/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
-/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _pages_signUp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pages/signUp */ "./src/pages/signUp.js");
+/* harmony import */ var _pages_home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/home */ "./src/pages/home.js");
+/* harmony import */ var _pages_chat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/chat */ "./src/pages/chat.js");
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! pubsub-js */ "./node_modules/pubsub-js/src/pubsub.js");
+/* harmony import */ var pubsub_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(pubsub_js__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
@@ -71949,8 +71984,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var Parse = __webpack_require__(/*! parse */ "./node_modules/parse/index.js");
 
-
- // Pages
+ // import "./styles/chat.scss";
+// Pages
 
 
 
@@ -71964,34 +71999,43 @@ function initParse() {
 
 function initSite() {
   initParse();
-  var signUpForm = new _pages_signUp__WEBPACK_IMPORTED_MODULE_2__["default"]();
-  var home = new _pages_home__WEBPACK_IMPORTED_MODULE_3__["default"]();
-  var chat = new _pages_chat__WEBPACK_IMPORTED_MODULE_4__["default"]();
+  var signUpForm = new _pages_signUp__WEBPACK_IMPORTED_MODULE_1__["default"]();
+  var home = new _pages_home__WEBPACK_IMPORTED_MODULE_2__["default"]();
+  var chat = new _pages_chat__WEBPACK_IMPORTED_MODULE_3__["default"]();
+  var loggedInUser = "";
 
-  if (localStorage.key(1)) {
-    if (JSON.parse(localStorage.getItem(localStorage.key(1))).objectId == localStorage.getItem("logged-in-user")) {
-      chat.init(JSON.parse(localStorage.getItem(localStorage.key(1))).username);
+  for (var i = 0; i < localStorage.length; i++) {
+    if (localStorage.key(i).endsWith("currentUser")) {
+      var value = localStorage.getItem(localStorage.key(i));
+      loggedInUser = JSON.parse(value);
+    }
+  } // debugger;
+
+
+  if (loggedInUser) {
+    if (loggedInUser.objectId == localStorage.getItem("logged-in-user")) {
+      chat.init(loggedInUser.username);
     } else home.init();
   } else home.init();
 
-  pubsub_js__WEBPACK_IMPORTED_MODULE_5___default().subscribe("user-logged-in", function (msg, user) {
+  pubsub_js__WEBPACK_IMPORTED_MODULE_4___default().subscribe("user-logged-in", function (msg, user) {
     var username = user.get("username");
     document.body.innerHTML = "";
     chat.init(username);
   });
-  pubsub_js__WEBPACK_IMPORTED_MODULE_5___default().subscribe("sign-up-page-requested", function () {
+  pubsub_js__WEBPACK_IMPORTED_MODULE_4___default().subscribe("sign-up-page-requested", function () {
     document.body.innerHTML = "";
     signUpForm.init();
   });
-  pubsub_js__WEBPACK_IMPORTED_MODULE_5___default().subscribe("new-user-created", function (msg, username) {
+  pubsub_js__WEBPACK_IMPORTED_MODULE_4___default().subscribe("new-user-created", function (msg, username) {
     document.body.innerHTML = "";
     chat.init(username);
   });
-  pubsub_js__WEBPACK_IMPORTED_MODULE_5___default().subscribe("logout-requested", function () {
+  pubsub_js__WEBPACK_IMPORTED_MODULE_4___default().subscribe("logout-requested", function () {
     document.body.innerHTML = "";
     localStorage.clear(home.init());
   });
-  pubsub_js__WEBPACK_IMPORTED_MODULE_5___default().subscribe("msgSent", /*#__PURE__*/function () {
+  pubsub_js__WEBPACK_IMPORTED_MODULE_4___default().subscribe("msgSent", /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(pubsubMsg, user) {
       var username, body, msgClass, msg, savedMsg;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -72016,7 +72060,7 @@ function initSite() {
               console.log({
                 savedMsg: savedMsg
               });
-              pubsub_js__WEBPACK_IMPORTED_MODULE_5___default().publish("msgSaved", savedMsg);
+              pubsub_js__WEBPACK_IMPORTED_MODULE_4___default().publish("msgSaved", savedMsg);
               document.querySelector("#text").value = "";
 
             case 12:

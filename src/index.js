@@ -1,6 +1,6 @@
 const Parse = require("parse");
 import "./styles/main.scss";
-import "./styles/chat.scss";
+// import "./styles/chat.scss";
 
 // Pages
 import SignUpForm from "./pages/signUp";
@@ -22,12 +22,17 @@ function initSite() {
   const home = new Home();
   const chat = new Chat();
 
-  if (localStorage.key(1)) {
-    if (
-      JSON.parse(localStorage.getItem(localStorage.key(1))).objectId ==
-      localStorage.getItem("logged-in-user")
-    ) {
-      chat.init(JSON.parse(localStorage.getItem(localStorage.key(1))).username);
+  let loggedInUser = "";
+  for (let i = 0; i < localStorage.length; i++) {
+    if (localStorage.key(i).endsWith("currentUser")) {
+      let value = localStorage.getItem(localStorage.key(i));
+      loggedInUser = JSON.parse(value);
+    }
+  }
+  // debugger;
+  if (loggedInUser) {
+    if (loggedInUser.objectId == localStorage.getItem("logged-in-user")) {
+      chat.init(loggedInUser.username);
     } else home.init();
   } else home.init();
 
