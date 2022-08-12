@@ -1,3 +1,4 @@
+import bgPNG from "../assests/bg.png";
 const Parse = require("parse");
 
 export default class SignUpForm {
@@ -28,6 +29,11 @@ export default class SignUpForm {
       display: flex;
       flex-direction: column;
       // gap: 16px;
+      background-image: url("${bgPNG}");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      color: white;
   }
   
   

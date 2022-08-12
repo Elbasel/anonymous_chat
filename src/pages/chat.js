@@ -17,7 +17,6 @@ export default class Chat {
     this.html = `
     <div class="header-area">
     <h1>Hello</h1>
-    // <div id="clock">1:00 PM</div>
     <button id="logout-button">Logout</button>
   </div>
   <div id="chat-area">
@@ -210,13 +209,13 @@ html {
       border-radius: 18px;
   }
   
-  #clock {
-    color: white;
-    font-size: 64px;
-    // width: 300px;
-    // height: 300px;
-    // z-index: 3;
-}
+//   #clock {
+//     color: white;
+//     font-size: 64px;
+//     // width: 300px;
+//     // height: 300px;
+//     // z-index: 3;
+// }
 
 .msg img {
   // flex: 1;
