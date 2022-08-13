@@ -61261,7 +61261,8 @@ var Chat = /*#__PURE__*/function () {
                           // localStorage.setItem("cachedMsgs", JSON.stringify(results));
                           // results = results.slice(-5);
                           try {
-                            // document.body.querySelector("#chat-area").innerHTML = "";
+                            debugger; // document.body.querySelector("#chat-area").innerHTML = "";
+
                             _iterator = _createForOfIteratorHelper(results);
 
                             try {
@@ -61287,7 +61288,9 @@ var Chat = /*#__PURE__*/function () {
                                   imgUrl: imgUrl
                                 }); // console.log(message);
 
-                              } // document.querySelector("#chat-area").lastChild.scrollIntoView();
+                              } // document.body.querySelector("#chat-area").scrollTop =
+                              // document.querySelector("#chat-area").scrollHeight;
+                              // document.querySelector("#chat-area").lastChild.scrollIntoView();
 
                             } catch (err) {
                               _iterator.e(err);

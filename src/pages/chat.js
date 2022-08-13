@@ -315,6 +315,7 @@ html {
       // results = results.slice(-5);
 
       try {
+        debugger;
         // document.body.querySelector("#chat-area").innerHTML = "";
         for (const message of results) {
           // Access the Parse Object attributes using the .GET method
@@ -332,6 +333,8 @@ html {
 
           // console.log(message);
         }
+        // document.body.querySelector("#chat-area").scrollTop =
+        // document.querySelector("#chat-area").scrollHeight;
         // document.querySelector("#chat-area").lastChild.scrollIntoView();
       } catch (error) {
         console.error("Error while fetching messages", error);
