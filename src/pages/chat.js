@@ -2,7 +2,7 @@ import UploadImgPng from "../assests/img.png";
 import sendImgPng from "../assests/send.png";
 import PubSub from "pubsub-js";
 import moment from "moment";
-import $ from "jquery";
+// import Avatar from "boring-avatars";
 const Parse = require("parse");
 
 export default class Chat {
@@ -100,6 +100,7 @@ html {
       display: flex;
       justify-content: flex-end;
       // max-width: 50%;
+
   }
   
   
@@ -114,7 +115,7 @@ html {
       display: flex;
       flex-direction: column;
       gap: 16px;
-      max-width: 50%;
+      max-width: 70%;
   
   }
   
@@ -146,6 +147,15 @@ html {
   
   
   }
+
+
+  .img-text-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 32px
+  }
+
+
   html {
     scrollbar-face-color: #646464;
     scrollbar-base-color: #646464;
@@ -479,7 +489,16 @@ html {
     return div.firstChild;
   }
 
-  getMsgHTML(msgText, userName, sentAt, msgClass = "", imgUrl = null) {
+  getMsgHTML(
+    msgText,
+    userName,
+    sentAt,
+    msgClass = "",
+    imgUrl = null,
+    profileImg = ""
+  ) {
+    const profilePictureURl = `https://source.boringavatars.com/beam/120/${userName}`;
+
     if (userName == Parse.User.current().get("username")) {
       userName = "You";
     }
@@ -497,11 +516,18 @@ html {
 
     return `
     <div class="msg ${msgClass}">
+
       <div class="msg-wrapper">
 
-        <p class="p-msg">${msgText}</p>
+        <div class="img-text-wrapper">
+          <img class="profile-img" src=${profilePictureURl}>
+          <p class="p-msg">${msgText}</p>
+        </div>
+
         <p class="user">${userName} at ${sentAt}</p>
+
       </div>
+
     </div>
   `;
   }
