@@ -315,7 +315,7 @@ html {
       // results = results.slice(-5);
 
       try {
-        debugger;
+        // debugger;
         // document.body.querySelector("#chat-area").innerHTML = "";
         for (const message of results) {
           // Access the Parse Object attributes using the .GET method
@@ -470,7 +470,11 @@ html {
       .addEventListener("change", function (e) {
         var fileUploadControl = document.querySelector("#file-upload");
         var file = fileUploadControl.files[0];
-        var name = file.name; //This does *NOT* need to be a unique name
+        let name = file.name; //This does *NOT* need to be a unique name
+        name = name.trim().replace(" ", "");
+        name = name.replace("(", "");
+        name = name.replace(")", "");
+        console.log(name);
         var parseFile = new Parse.File(name, file);
 
         parseFile.save().then(
@@ -478,7 +482,7 @@ html {
             Chat.saveImgMessage(parseFile);
           },
           function (error) {
-            alert("error");
+            alert(error);
           }
         );
       });

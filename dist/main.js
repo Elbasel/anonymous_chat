@@ -61261,8 +61261,8 @@ var Chat = /*#__PURE__*/function () {
                           // localStorage.setItem("cachedMsgs", JSON.stringify(results));
                           // results = results.slice(-5);
                           try {
-                            debugger; // document.body.querySelector("#chat-area").innerHTML = "";
-
+                            // debugger;
+                            // document.body.querySelector("#chat-area").innerHTML = "";
                             _iterator = _createForOfIteratorHelper(results);
 
                             try {
@@ -61439,11 +61439,15 @@ var Chat = /*#__PURE__*/function () {
         var file = fileUploadControl.files[0];
         var name = file.name; //This does *NOT* need to be a unique name
 
+        name = name.trim().replace(" ", "");
+        name = name.replace("(", "");
+        name = name.replace(")", "");
+        console.log(name);
         var parseFile = new Parse.File(name, file);
         parseFile.save().then(function () {
           Chat.saveImgMessage(parseFile);
         }, function (error) {
-          alert("error");
+          alert(error);
         });
       });
     }
