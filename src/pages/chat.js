@@ -16,21 +16,34 @@ export default class Chat {
 
     this.html = `
     <div class="header-area">
-    <h1>Hello</h1>
+    <h1>Your Name: </h1>
     <button id="logout-button">Logout</button>
   </div>
   <div id="chat-area">
 
   </div>
-  <div class="msg-area">
-    <button id="upload-img-button" class="msg-button"><img id="upload-img" /></button>
-    <input type="file" name="file-upload" id="file-upload">
+  <input type="file" name="file-upload" id="file-upload">
+
+  <form>
+    <button type="button" id="upload-img-button" class="msg-button"><img id="upload-img" /></button>
     <input id="text" type="text" />
-    <button id="send-button" class="msg-button"><img id="send" /></button>
-  </div>
+    <button type="button" id="send-button" class="msg-button"><img id="send" /></button>
+    </form>
   `;
 
     this.css = `
+
+    form {
+      display: flex;
+      // justify-content: space-between;
+      flex: 1;
+      gap: 32px;
+  
+      align-items: center;
+      // border: 1px solid red;
+
+
+    }
     body {
       display: flex;
       flex-direction: column;
@@ -53,20 +66,20 @@ export default class Chat {
       border-bottom: 1px solid white;
       align-items: center;
       padding: 32px;
-      max-height: 200px;
+      max-height: 100px;
   }
   
   h1 {
-      font-size: 64px;
+      font-size: 52px;
   }
   
   #chat-area {
     margin-top: 100px;
     margin-bottom: 100px;
     // border: 1px solid red;
-    flex: 10;
+    flex: 12;
     scroll-behavior: smooth;
-    max-height: 60vh;
+    max-height: 70vh;
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -144,6 +157,8 @@ html {
       gap: 32px;
   
       align-items: center;
+      // max-height: 100px;
+      // border: 1px solid red;
   
   
   }
@@ -252,10 +267,22 @@ html {
     document.body.innerHTML = `<style>${this.css}</style>` + this.html;
     document.querySelector("#upload-img").src = UploadImgPng;
     document.querySelector("#send").src = sendImgPng;
+    document.querySelector("form").addEventListener("submit", (e) => {
+      // e.stopPropagation();
 
+      e.preventDefault();
+      // debugger;
+
+      PubSub.publish("msgSent", Parse.User.current());
+    });
     document
       .querySelector("#upload-img-button")
-      .addEventListener("click", () => {
+      .addEventListener("click", (e) => {
+        if (e.clientX === 0) {
+          return;
+        }
+        debugger;
+
         document.querySelector("#file-upload").click();
       });
 
@@ -347,10 +374,12 @@ html {
 
     subscription.on("create", (msg) => {
       // console.log(msg);
-      // console.log("On create event");
+      console.log("On create event");
 
       (async () => {
-        const query = new Parse.Query("Message").ascending("createdAt");
+        const query = new Parse.Query("Message")
+          .ascending("createdAt")
+          .limit(50);
 
         // You can also query by using a parameter of an object
         // query.equalTo('objectId', 'xKue915KBG');
@@ -361,7 +390,7 @@ html {
         // var msgs = this.messages;
         // let cachedMsgs = JSON.parse(localStorage.getItem("cachedMsgs"));
         let results = await query.find();
-        // debugger;
+        debugger;
 
         // results = results.filter((msg) => {
         //   for (const cachedMsg of cachedMsgs) {
