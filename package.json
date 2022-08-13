@@ -30,9 +30,16 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
+    "better-usernames": "^1.5.2",
+    "crypto": "^1.0.1",
     "jquery": "^3.6.0",
     "moment": "^2.29.4",
     "parse": "^3.4.3",
-    "pubsub-js": "^1.9.4"
+    "pubsub-js": "^1.9.4",
+    "random-username-generator": "^1.0.4",
+    "unique-username-generator": "^1.1.1"
+  },
+  "browser": {
+    "crypto": false
   }
 }

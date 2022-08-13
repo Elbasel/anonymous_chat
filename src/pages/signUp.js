@@ -1,5 +1,6 @@
 import bgPNG from "../assests/bg.png";
 const Parse = require("parse");
+var usernameGenerator = require("random-username-generator");
 
 export default class SignUpForm {
   constructor() {
@@ -125,7 +126,38 @@ export default class SignUpForm {
       width: 100%;
       padding: 16px;
   
-  }`;
+  }
+
+  @keyframes vibrate-1 {
+    0% {
+      -webkit-transform: translate(0);
+              transform: translate(0);
+    }
+    20% {
+      -webkit-transform: translate(-2px, 2px);
+              transform: translate(-2px, 2px);
+              
+    }
+    40% {
+      -webkit-transform: translate(-2px, -2px);
+              transform: translate(-2px, -2px);
+    }
+    60% {
+      -webkit-transform: translate(2px, 2px);
+              transform: translate(2px, 2px);
+    }
+    80% {
+      -webkit-transform: translate(2px, -2px);
+              transform: translate(2px, -2px);
+    }
+    100% {
+      -webkit-transform: translate(0);
+              transform: translate(0);
+    }
+  }
+  .vibrate-1
+  {-webkit-animation:vibrate-1 .3s linear infinite both;animation:vibrate-1 .3s linear infinite both}
+  `;
   }
 
   getHTML() {
@@ -166,6 +198,11 @@ export default class SignUpForm {
       .addEventListener("focusout", () => {
         this.isPasswordValid();
       });
+
+    usernameGenerator.setSeperator("_");
+    var username = usernameGenerator.generate();
+    document.querySelector("button").classList.add("vibrate-1");
+    document.querySelector("#username").value = username;
   }
 
   isPasswordValid() {
