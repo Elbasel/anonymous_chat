@@ -337,6 +337,7 @@ html {
     (async () => {
       const query = new Parse.Query("Message").ascending("createdAt");
       let results = await query.find();
+      results = results.slice(-50);
 
       // localStorage.setItem("cachedMsgs", JSON.stringify(results));
       // results = results.slice(-5);
@@ -361,25 +362,27 @@ html {
           // console.log(message);
         }
         // document.body.querySelector("#chat-area").scrollTop =
+        // document.querySelector("#chat-area").scrollHeight + 999999;
+        // document.body.querySelector("#chat-area").scrollTop =
         // document.querySelector("#chat-area").scrollHeight;
-        // document.querySelector("#chat-area").lastChild.scrollIntoView();
+        document.querySelector("#chat-area").lastChild.scrollIntoView();
+        // document.querySelector("#chat-area").scroll(0, 99);
       } catch (error) {
         console.error("Error while fetching messages", error);
       }
     })();
 
-    const Message = Parse.Object.extend("Message");
+    // const Message = Parse.Object.extend("Message");
     var query = new Parse.Query("Message").ascending("createdAt");
     let subscription = client.subscribe(query);
 
     subscription.on("create", (msg) => {
       // console.log(msg);
       console.log("On create event");
+      // debugger;
 
       (async () => {
-        const query = new Parse.Query("Message")
-          .ascending("createdAt")
-          .limit(50);
+        const query = new Parse.Query("Message").ascending("createdAt");
 
         // You can also query by using a parameter of an object
         // query.equalTo('objectId', 'xKue915KBG');
@@ -390,7 +393,8 @@ html {
         // var msgs = this.messages;
         // let cachedMsgs = JSON.parse(localStorage.getItem("cachedMsgs"));
         let results = await query.find();
-        debugger;
+        results = results.slice(-50);
+        // debugger;
 
         // results = results.filter((msg) => {
         //   for (const cachedMsg of cachedMsgs) {
@@ -434,9 +438,9 @@ html {
         }
       })();
     });
-    let query2 = new Parse.Query("Message").ascending("createdAt");
+    // let query2 = new Parse.Query("Message").ascending("createdAt");
 
-    this.messages = await query2.find();
+    // this.messages = await query2.find();
   }
 
   addMsg({ body, username, createdAt, msgClass, imgUrl }) {
